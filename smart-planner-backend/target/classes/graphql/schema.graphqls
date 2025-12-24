@@ -1,0 +1,48 @@
+type Query {
+    dashboard(projectId: ID, topTagsLimit: Int = 10): Dashboard!
+    topTags(projectId: ID, limit: Int = 10): [TopTag!]!
+    tasksByPriority(projectId: ID): [TasksByPriority!]!
+}
+
+type Dashboard {
+    topTags: [TopTag!]!
+    tasksByPriority: [TasksByPriority!]!
+}
+
+type TopTag {
+    tagName: String!
+    usageCount: Long!
+}
+
+type TasksByPriority {
+    projectId: ID!
+    priority: Int!
+    taskCount: Long!
+}
+
+scalar Long
+type Query {
+    dashboard(projectId: ID, topTagsLimit: Int = 10, latitude: Float, longitude: Float): Dashboard!
+    topTags(projectId: ID, limit: Int = 10): [TopTag!]!
+    tasksByPriority(projectId: ID): [TasksByPriority!]!
+    dailyQuote: Quote!
+    currentWeather(latitude: Float!, longitude: Float!): Weather!
+}
+
+type Dashboard {
+    topTags: [TopTag!]!
+    tasksByPriority: [TasksByPriority!]!
+    quote: Quote!
+    weather: Weather
+}
+
+type Quote {
+    content: String!
+    author: String!
+}
+
+type Weather {
+    temperature: Float
+    windspeed: Float
+    weatherCode: Int
+}
