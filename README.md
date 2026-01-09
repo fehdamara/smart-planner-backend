@@ -57,3 +57,6 @@ Inheritance: Item -> Task/Appointment (JOINED).
 ### 1) Start PostgreSQL (Docker)
 ```bash
 docker compose up -d
+
+### 2)PostMan env
+https://s00013324-5502309.postman.co/workspace/Smart-Planner-Backend~f606d15b-3156-4a77-bfa7-bcb7be0ca310/environment/50988037-a37ffa8d-3153-493d-af28-6aea5f6383ff?action=share&creator=50988037&active-environment=50988037-a37ffa8d-3153-493d-af28-6aea5f6383ff
