@@ -1,0 +1,465 @@
+{
+  "info": {
+    "_postman_id": "e6d9a6c2-2d2d-4b0a-9f4f-11b7b8aa2222",
+    "name": "Smart Planner API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Smart Planner Backend - REST + JWT + Refresh + Logout Blacklist + Admin/Manager + Reports + GraphQL + Integrations"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{accessToken}}", "type": "string" }
+    ]
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health - GET /health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/health",
+              "host": ["{{baseUrl}}"],
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register - POST /auth/register (No Auth) + Save Tokens",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 201 or 200', function () {",
+                  "  pm.expect([200,201]).to.include(pm.response.code);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "if (json && json.accessToken) pm.environment.set('accessToken', json.accessToken);",
+                  "if (json && json.refreshToken) pm.environment.set('refreshToken', json.refreshToken);",
+                  "if (json && json.id) pm.environment.set('userId', String(json.id));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"UserPass123!\",\n  \"name\": \"User\",\n  \"surname\": \"One\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/register",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "register"]
+            }
+          }
+        },
+        {
+          "name": "Login USER - POST /auth/login (No Auth) + Save Tokens",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "  pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "if (json && json.accessToken) pm.environment.set('accessToken', json.accessToken);",
+                  "if (json && json.refreshToken) pm.environment.set('refreshToken', json.refreshToken);",
+                  "if (json && json.id) pm.environment.set('userId', String(json.id));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user1@test.com\",\n  \"password\": \"UserPass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login ADMIN - POST /auth/login (No Auth) + Save Tokens",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "  pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "if (json && json.accessToken) pm.environment.set('accessToken', json.accessToken);",
+                  "if (json && json.refreshToken) pm.environment.set('refreshToken', json.refreshToken);",
+                  "if (json && json.id) pm.environment.set('userId', String(json.id));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@smartplanner.local\",\n  \"password\": \"AdminPass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Login MANAGER - POST /auth/login (No Auth) + Save Tokens",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "  pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "if (json && json.accessToken) pm.environment.set('accessToken', json.accessToken);",
+                  "if (json && json.refreshToken) pm.environment.set('refreshToken', json.refreshToken);",
+                  "if (json && json.id) pm.environment.set('userId', String(json.id));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"manager@smartplanner.local\",\n  \"password\": \"ManagerPass123!\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            }
+          }
+        },
+        {
+          "name": "Refresh - POST /auth/refresh (No Auth) + Update Tokens",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('Status is 200', function () {",
+                  "  pm.expect(pm.response.code).to.eql(200);",
+                  "});",
+                  "",
+                  "const json = pm.response.json();",
+                  "if (json && json.accessToken) pm.environment.set('accessToken', json.accessToken);",
+                  "if (json && json.refreshToken) pm.environment.set('refreshToken', json.refreshToken);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "auth": { "type": "noauth" },
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/refresh",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "refresh"]
+            }
+          }
+        },
+        {
+          "name": "Logout - POST /auth/logout (Bearer) [blacklist access + revoke refresh]",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/auth/logout",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "logout"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Me - GET /users/me (Bearer)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/users/me",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "me"]
+            }
+          }
+        },
+        {
+          "name": "Update Profile Image - PATCH /users/me/profile-image (Bearer)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"profileImageUrl\": \"https://example.com/avatar.png\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/me/profile-image",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "me", "profile-image"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Admin (ADMIN only)",
+      "item": [
+        {
+          "name": "List Users - GET /admin/users?page=0&size=10&sort=email,asc",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users?page=0&size=10&sort=email,asc",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users"],
+              "query": [
+                { "key": "page", "value": "0" },
+                { "key": "size", "value": "10" },
+                { "key": "sort", "value": "email,asc" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get User - GET /admin/users/{{userId}}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users", "{{userId}}"]
+            }
+          }
+        },
+        {
+          "name": "Set User Role - PATCH /admin/users/{{userId}}/role",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"MANAGER\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/{{userId}}/role",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users", "{{userId}}", "role"]
+            }
+          }
+        },
+        {
+          "name": "Delete User - DELETE /admin/users/{{userId}}",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/admin/users/{{userId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["admin", "users", "{{userId}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Manager Reports (MANAGER/ADMIN)",
+      "item": [
+        {
+          "name": "Top Tags - GET /manager/reports/top-tags?limit=10",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manager/reports/top-tags?limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["manager", "reports", "top-tags"],
+              "query": [{ "key": "limit", "value": "10" }]
+            }
+          }
+        },
+        {
+          "name": "Top Tags by Project - GET /manager/reports/top-tags?projectId={{projectId}}&limit=10",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manager/reports/top-tags?projectId={{projectId}}&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["manager", "reports", "top-tags"],
+              "query": [
+                { "key": "projectId", "value": "{{projectId}}" },
+                { "key": "limit", "value": "10" }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Tasks by Priority - GET /manager/reports/tasks-by-priority",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manager/reports/tasks-by-priority",
+              "host": ["{{baseUrl}}"],
+              "path": ["manager", "reports", "tasks-by-priority"]
+            }
+          }
+        },
+        {
+          "name": "Tasks by Priority (Project) - GET /manager/reports/tasks-by-priority?projectId={{projectId}}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/manager/reports/tasks-by-priority?projectId={{projectId}}",
+              "host": ["{{baseUrl}}"],
+              "path": ["manager", "reports", "tasks-by-priority"],
+              "query": [{ "key": "projectId", "value": "{{projectId}}" }]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "GraphQL Dashboard (Read-only)",
+      "item": [
+        {
+          "name": "GraphQL - Dashboard (quote + weather + reports)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query($lat: Float!, $lon: Float!){ dashboard(topTagsLimit: 10, latitude: $lat, longitude: $lon){ quote{content author} weather{temperature windspeed weatherCode} topTags{tagName usageCount} tasksByPriority{projectId priority taskCount} } }\",\n  \"variables\": { \"lat\": {{lat}}, \"lon\": {{lon}} }\n}\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/graphql",
+              "host": ["{{baseUrl}}"],
+              "path": ["graphql"]
+            }
+          }
+        },
+        {
+          "name": "GraphQL - topTags",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query($projectId: ID, $limit: Int){ topTags(projectId: $projectId, limit: $limit){ tagName usageCount } }\",\n  \"variables\": { \"projectId\": {{projectId}}, \"limit\": 10 }\n}\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/graphql",
+              "host": ["{{baseUrl}}"],
+              "path": ["graphql"]
+            }
+          }
+        },
+        {
+          "name": "GraphQL - tasksByPriority",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query($projectId: ID){ tasksByPriority(projectId: $projectId){ projectId priority taskCount } }\",\n  \"variables\": { \"projectId\": {{projectId}} }\n}\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/graphql",
+              "host": ["{{baseUrl}}"],
+              "path": ["graphql"]
+            }
+          }
+        },
+        {
+          "name": "GraphQL - dailyQuote",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query{ dailyQuote{ content author } }\"\n}\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/graphql",
+              "host": ["{{baseUrl}}"],
+              "path": ["graphql"]
+            }
+          }
+        },
+        {
+          "name": "GraphQL - currentWeather",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query($lat: Float!, $lon: Float!){ currentWeather(latitude: $lat, longitude: $lon){ temperature windspeed weatherCode } }\",\n  \"variables\": { \"lat\": {{lat}}, \"lon\": {{lon}} }\n}\n"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/graphql",
+              "host": ["{{baseUrl}}"],
+              "path": ["graphql"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "event": [],
+  "protocolProfileBehavior": {}
+}
