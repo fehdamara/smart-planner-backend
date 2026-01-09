@@ -8,7 +8,7 @@
   "auth": {
     "type": "bearer",
     "bearer": [
-      { "key": "token", "value": "{{accessToken}}", "type": "string" }
+      { "key": "token", "value": "**************", "type": "string" }
     ]
   },
   "item": [
@@ -463,3 +463,4 @@
   "event": [],
   "protocolProfileBehavior": {}
 }
+
