@@ -140,7 +140,7 @@ query {
   }
 }
 
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 🌍 External API Integrations
 The backend integrates with:
 
@@ -186,25 +186,27 @@ Maven Wrapper included (mvnw / mvnw.cmd)
 Steps
 Start PostgreSQL:
 
-bash
-Copia codice
+
 docker-compose up -d
 # or
+
 docker compose up -d
+
 Run the application (Linux/macOS):
 
-bash
-Copia codice
+
 ./mvnw -DskipTests spring-boot:run
+
 Run the application (Windows):
 
-bat
-Copia codice
+
 .\mvnw.cmd -DskipTests spring-boot:run
+
+-------------------------------------------------------------------------------------
+
 The backend will be available at:
 
-arduino
-Copia codice
+
 http://localhost:8080
 🧪 Testing with Postman
 A complete Postman collection (JSON) is included in the repository.
@@ -231,10 +233,9 @@ On startup, the application creates:
 Roles assigned randomly
 
 At least one ADMIN and one MANAGER
-
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 📁 Project Structure
-css
-Copia codice
+
 src/main/java/com/example/smartplanner
 ├── controller
 ├── service
@@ -244,6 +245,9 @@ src/main/java/com/example/smartplanner
 ├── security
 ├── exception
 └── config
+
+
+°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°
 ⚠️ Known Limitations & Notes
 The GraphQL dashboard is intentionally read-only.
 Mutations were not implemented by design, as the dashboard is meant for reporting and aggregated views only.
@@ -263,6 +267,9 @@ In a production environment, a dedicated migration tool (e.g. Flyway or Liquibas
 The frontend is not included in this project.
 The backend is fully functional and testable via REST APIs, GraphQL, and the provided Postman collection.
 
+
+
+*******************************************************************************
 ✅ Evaluation Notes
 This project fulfills all mandatory requirements:
 
@@ -284,10 +291,11 @@ Postman collection
 
 Clear documentation
 
-Optional features were added to enhance the final evaluation.
+çççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççççç
 
 👨‍💻 Author
 Smart Planner Backend
 Developed for academic evaluation using Spring Boot 4.
 ```
+
 
