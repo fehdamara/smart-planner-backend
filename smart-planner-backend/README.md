@@ -139,6 +139,8 @@ query {
     }
   }
 }
+
+
 🌍 External API Integrations
 The backend integrates with:
 
@@ -288,3 +290,4 @@ Optional features were added to enhance the final evaluation.
 Smart Planner Backend
 Developed for academic evaluation using Spring Boot 4.
 ```
+
