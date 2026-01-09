@@ -1,0 +1,51 @@
+schema {
+    query: Query
+}
+
+
+type Query {
+    # Dashboard aggregata (report + integrazioni esterne)
+    dashboard(
+        projectId: ID
+        topTagsLimit: Int = 10
+        latitude: Float
+        longitude: Float
+    ): Dashboard!
+
+    # Report endpoints anche separati (comodi per test)
+    topTags(projectId: ID, limit: Int = 10): [TopTag!]!
+    tasksByPriority(projectId: ID): [TasksByPriority!]!
+
+    # Integrazioni esterne singole (comode per test)
+    dailyQuote: Quote!
+    currentWeather(latitude: Float!, longitude: Float!): Weather!
+}
+
+type Dashboard {
+    topTags: [TopTag!]!
+    tasksByPriority: [TasksByPriority!]!
+    quote: Quote!
+    weather: Weather
+}
+
+type TopTag {
+    tagName: String!
+    usageCount: Int!
+}
+
+type TasksByPriority {
+    projectId: ID!
+    priority: Int!
+    taskCount: Int!
+}
+
+type Quote {
+    content: String!
+    author: String!
+}
+
+type Weather {
+    temperature: Float
+    windspeed: Float
+    weatherCode: Int
+}
